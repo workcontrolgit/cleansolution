@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configuration type="entity.indexes" id="8295832b-ac39-48eb-9187-34765100ca9d">
+		<index id="16fda889-dfbc-4d19-9505-757323a5bb4f" clustered="0" importedname="IX_TodoItems_ListId" indextype="1" isunique="0">
+				<summary><![CDATA[]]></summary>
+				<indexcolumnset>
+						<column id="aff6978d-4004-499d-98a1-df06ef96c248" ascending="1" fieldid="ff36618e-a470-4785-a37c-713d71529436" sortorder="1" />
+				</indexcolumnset>
+		</index>
+		<index id="99050b7c-635c-4812-bf7a-b49ccd90a612" clustered="1" importedname="PK_TodoItems" indextype="0" isunique="1">
+				<summary><![CDATA[]]></summary>
+				<indexcolumnset>
+						<column id="33b2afa2-a951-4943-982e-eb798e102c5c" ascending="1" fieldid="156fc790-2803-42c9-aa11-6152d591c220" sortorder="1" />
+				</indexcolumnset>
+		</index>
+</configuration>
