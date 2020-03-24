@@ -4,6 +4,7 @@ using cleansolution.Infrastructure.Persistence;
 using cleansolution.WebUI.Common;
 using cleansolution.WebUI.Services;
 using FluentValidation.AspNetCore;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -64,13 +65,22 @@ namespace cleansolution.WebUI
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
-                     options.Authority = $"https://login.microsoftonline.com/common";
+                     options.Authority = $"https://login.microsoftonline.us/common";
                      options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
                      //options.ClientId = "99eb0b9d-ca40-476e-b5ac-6f4c32bfb530";
                      options.ClientId = "67b6f294-5565-43d2-ba03-c082ae6ee7b5";
 
                      options.CallbackPath = "/signin-oidc";
+
                  });
+
+            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            //  .AddIdentityServerAuthentication(options =>
+            //  {
+            //      options.Authority = "https://localhost:44312/";
+            //      options.ApiName = "dataEventRecords";
+            //      options.ApiSecret = "dataEventRecordsSecret";
+            //  });
 
             services.AddOpenApiDocument(configure =>
             {

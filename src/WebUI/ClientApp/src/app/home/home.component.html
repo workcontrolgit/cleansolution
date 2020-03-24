@@ -1,14 +1,71 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
+<h1>Hello SDD Developers</h1>
+<p>Welcome to the Clean Architecture for .NET Core.  This prototype of single-page-application is built with:</p>
 <ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
+  <li><a href='https://get.asp.net/'>ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
+  <li><a href='https://angular.io/'>Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
+  <li><a href='http://getbootstrap.com/'>Bootstrap 4.3</a> for layout and styling</li>
+  <li><a href='https://azure.microsoft.com/en-us/services/sql-database/'>Azure MS SQL SAS</a> for storage</li>
+  <li><a href='https://docs.microsoft.com/en-us/azure/active-directory/authentication/'>Azure Active Directory and MFA</a> for application security</li>
+  <li><a href='https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1'>Heath Check Net Core 3.1</a> for health probe</li>
+
+ 
 </ul>
-<p>To help you get started, we've also set up:</p>
+
+<h2>Prototype Exploration</h2>
+<p>
+  This simple Todo list demo runs inside the Azuze Gov Cloud, Development Subcription.  The Azure app service name is "cleansolution" and database name is "cleansolutiondb".
+  The source code is in the the "cleansolution" GIT repository in Azure DevOps.  Below are quick links to explore the demo
+
+</p>
+
 <ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
+  <li><a href="/">Home</a> - homepage of the demo app </li>
+  <li><a href="/Identity/Account/Register">Register</a> - register new user account into asp.net indentify or using external providoer Azure AD as source</li>
+  <li><a href="/Identity/Account/Login">Login</a> - login using asp.net indentify (accounts in the database) or Azure Cloud MFA (account in Azure AD dosdev.us) </li>
+  <li><a href="/counter">Counter</a> - example menu item that will navigate to simple Angular page with a button </li>
+  <li><a href="/fetch-data">Fetch data</a> - demontration of calling external webapi weather service </li>
+  <li><a href="/todo">Todo</a> - simple CRUD against EF CORE/MSSQL backend</li>
+  <li><a href="/api">Swagger</a> - explore webapi endpoints</li>
+  <li><a href="/health">Health Check</a> - basic healh probe</li>
 </ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+
+
+
+<h2>Architecture References</h2>
+<p>Credit:  https://jasontaylor.dev/clean-architecture-getting-started </p>
+<p>With Clean Architecture, the <strong>Domain </strong>and <strong>Application </strong>layers are at the centre of the design. This is known as the <strong>Core </strong>of the system.</p>
+<p>The <strong>Domain</strong> layer contains enterprise logic and types and the <strong>Application </strong>layer contains business logic and types. The difference is that enterprise logic could be shared across many systems, whereas the business logic will typically only be used within this system.</p>
+<p><strong>Core </strong>should not be dependent on data access and other infrastructure concerns so those dependencies are inverted.  This is achieved by adding interfaces or abstractions within <strong>Core</strong> that are implemented by layers outside of <strong>Core</strong>. For example, if you wanted to implement the <a href="https://deviq.com/repository-pattern/">Repository</a> pattern you would do so by adding an interface within <strong>Core </strong>and adding the implementation within <strong>Infrastructure</strong>. </p>
+<p>All dependencies flow inwards and <strong>Core </strong>has no dependency on any other layer. <strong>Infrastructure </strong>and <strong>Presentation </strong>depend on <strong>Core</strong>, but not on one another.</p>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img data-attachment-id="2327" data-permalink="https://jasontaylor.dev/clean-architecture-getting-started/figure-01-2/" data-orig-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" data-orig-size="531,531" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Figure-01-2" data-image-description="" data-medium-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=300%2C300&amp;ssl=1" data-large-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" src="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=800&#038;ssl=1" alt="" class="wp-image-2327" srcset="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=531&amp;ssl=1 531w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=150%2C150&amp;ssl=1 150w" sizes="(max-width: 531px) 100vw, 531px" data-recalc-dims="1" /><figcaption><strong>Figure: Clean Architecture Diagram</strong></figcaption></figure></div>
+<p>This results in architecture and design that is:</p>
+<ul><li><strong>Independent of frameworks</strong>   it does not require the existence of some tool or framework</li><li><strong>Testable</strong>   easy to test &#8211; <strong>Core </strong>has no dependencies on anything external, so writing automated tests is much easier</li><li><strong>Independent of UI</strong>   logic is kept out of the UI so it is easy to change to another technology &#8211; right now you might be using Angular, soon Vue, eventually Blazor!</li><li><strong>Independent of the database</strong>   data-access concerns are cleanly separated so moving from SQL Server to CosmosDB or otherwise is trivial</li><li><strong>Independent of anything external</strong>   in fact, <strong>Core </strong>is completely isolated from the outside world &#8211; the difference between a system that will last 3 years, and one that will last 20 years</li></ul>
+<p>In the above design, there are only three circles, you may need more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
+<h2>Technologies</h2>
+
+<p>Aside from .NET Core, numerous technologies are used within this solution including:</p>
+
+
+<ul>
+  <li>CQRS with <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
+  <li>Validation with <a href="https://fluentvalidation.net/">FluentValidation</a></li>
+  <li>Object-Object Mapping with <a href="https://automapper.org/">AutoMapper</a></li>
+  <li>Data access with <a href="https://docs.microsoft.com/en-us/ef/core/">Entity Framework Core</a></li>
+  <li>Web API using <a href="https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1">ASP.NET Core</a></li>
+  <li>UI using <a href="https://angular.io/">Angular 8</a></li>
+  <li>Open API with <a href="https://github.com/RicoSuter/NSwag">NSwag</a></li>
+  <li>Security using <a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-3.1">ASP.NET Core Identity + IdentityServer + Azure AD</a></li>
+  <li>Automated testing with <a href="https://xunit.net/">xUnit.net</a>, <a href="https://github.com/Moq/moq4/wiki/Quickstart">Moq</a>, and <a href="https://shouldly.readthedocs.io/en/latest/">Shouldly</a></li>
+</ul>
+
+<h2>Additional resources</h2>
+
+<p>If you would like to learn more about any of these topics, take a look at the following resources: </p>
+
+<ul>
+  <li><a href="https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/">Microsoft Architect Modern Web Applications with ASP.NET Core and Azure</a></li>
+  <li><a href="https://github.com/JasonGT/CleanArchitecture">Clean Architecture Solution Template</a></li>
+  <li><a href="https://youtu.be/5OtUm1BLmG0">Clean Architecture with ASP.NET Core 3.0 (NDC Sydney 2019)</a></li>
+  <li><a href="https://rules.ssw.com.au/rules-to-better-clean-architecture">Rules to Better Clean Architecture</a></li>
+
+</ul>
