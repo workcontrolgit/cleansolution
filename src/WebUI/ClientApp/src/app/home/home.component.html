@@ -1,46 +1,63 @@
 <h1>Hello SDD Developers</h1>
-<p>Welcome to the Clean Architecture for .NET Core.  This prototype of single-page-application is built with:</p>
+<p>Welcome to Angular/NetCore WebAPI prototype.  The prototype is built on opensource technologies from established vendors  Google, Microsoft and Twitter.</p>
 <ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
   <li><a href='https://angular.io/'>Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
+  <li><a href='https://get.asp.net/'>ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
   <li><a href='http://getbootstrap.com/'>Bootstrap 4.3</a> for layout and styling</li>
-  <li><a href='https://azure.microsoft.com/en-us/services/sql-database/'>Azure MS SQL SAS</a> for storage</li>
-  <li><a href='https://docs.microsoft.com/en-us/azure/active-directory/authentication/'>Azure Active Directory and MFA</a> for application security</li>
+  <li><a href='https://azure.microsoft.com/en-us/services/sql-database/'>Azure MS SQL SaS</a> for storage</li>
+  <li><a href='https://docs.microsoft.com/en-us/azure/active-directory/authentication/'>Azure Active Directory and MFA</a> for WebAPI security</li>
   <li><a href='https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1'>Heath Check Net Core 3.1</a> for health probe</li>
 
- 
+
 </ul>
 
-<h2>Prototype Exploration</h2>
-<p>
-  This simple Todo list demo runs inside the Azuze Gov Cloud, Development Subcription.  The Azure app service name is "cleansolution" and database name is "cleansolutiondb".
-  The source code is in the the "cleansolution" GIT repository in Azure DevOps.  Below are quick links to explore the demo
+<h2>Why and What</h2>
 
+<p>
+  The purpose of this prototype is to "learn, inspire an build" modern apps.  The prototype architecture is based on practical software solutions from the legendary Robert C. Martin (“Uncle Bob”).
+  Please refer to Architecture References section on this page for Clean Architecture overview.
+</p>
+
+<p>
+  So why not stay with the simple three-tiered architecture?  The UI layer couples with the Business layer and therefore the Database layer.
+  So then everything in our application is dependent on the database layer, aka "IDB" in our shop.
+  That might seem like no big deal, but let’s consider how often organization and applications make changes to their database.  For examples, let's go from on-prem PeopleSoft to cloud HCM.
+  Let's go from having all the logic in stored procedures to having it all in the ORM.  Let's move on-prem apps to the cloud and run them inside the Docker container.
+  And none of these changes have anything to do with the application core business functionality.
+</p>
+
+<p>
+  How to modernize our apps?  How to refactor our apps and transition from rigid and fragile to flexible and agile?   Answer:  Clean Architecture and <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles.  This prototype is a demo of Clean Architecture, written in Angular/NetCore stack.
 </p>
 
 <ul>
-  <li><a href="/">Home</a> - homepage of the demo app </li>
-  <li><a href="/Identity/Account/Register">Register</a> - register new user account into asp.net indentify or using external providoer Azure AD as source</li>
-  <li><a href="/Identity/Account/Login">Login</a> - login using asp.net indentify (accounts in the database) or Azure Cloud MFA (account in Azure AD dosdev.us) </li>
-  <li><a href="/counter">Counter</a> - example menu item that will navigate to simple Angular page with a button </li>
-  <li><a href="/fetch-data">Fetch data</a> - demontration of calling external webapi weather service </li>
-  <li><a href="/todo">Todo</a> - simple CRUD against EF CORE/MSSQL backend</li>
-  <li><a href="/api">Swagger</a> - explore webapi endpoints</li>
-  <li><a href="/health">Health Check</a> - basic healh probe</li>
+  <li><a href="/">Home</a> - homepage of the prototype</li>
+  <li><a href="/Identity/Account/Register">Register</a> - demonstration of provider model; storage of user accounts can be in Asp.Net Indentity Or Azure AD</li>
+  <li><a href="/Identity/Account/Login">Login</a> - demonstration of provider model; login using Asp.Net Indentity (accounts in the database) Or Azure AD/MFA</li>
+  <li><a href="/counter">Counter</a> - demonstration of publicly availabe application page that is NOT secured by Json Web Token (JWT)</li>
+  <li><a href="/fetch-data">Fetch data</a> - demonstration of proxy WebAPI (WebAPI calling WebAPI - weather service in this prototype); Securing data with JWT</li>
+  <li><a href="/todo">Todo</a> - demonstration of CRUD using Entity Framework against MSSQL SaS database; Securing WebAPI endpoints with JWT; Auto-gen Angular HTTP client Typescript library based on swagger.json with NSwag API</li>
+  <li><a href="/api">Swagger</a> - exploring webapi endpoints, providing UI to enter JWT token to explore WebAPI via web browser</li>
+  <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes avaiable for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
 </ul>
 
+<h2>Where</h2>
+
+<p>
+  This prototype is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
+</p>
 
 
 <h2>Architecture References</h2>
-<p>Credit:  https://jasontaylor.dev/clean-architecture-getting-started </p>
-<p>With Clean Architecture, the <strong>Domain </strong>and <strong>Application </strong>layers are at the centre of the design. This is known as the <strong>Core </strong>of the system.</p>
-<p>The <strong>Domain</strong> layer contains enterprise logic and types and the <strong>Application </strong>layer contains business logic and types. The difference is that enterprise logic could be shared across many systems, whereas the business logic will typically only be used within this system.</p>
+<p>Source/Credit: <a href="https://jasontaylor.dev/clean-architecture-getting-started">https://jasontaylor.dev/clean-architecture-getting-started </a></p>
+<p>With Clean Architecture (see picture below), the <strong>Domain </strong>and <strong>Application </strong>layers are at the center of the design. This is known as the <strong>Core </strong>of the system.</p>
+<p>The <strong>Domain</strong> layer contains enterprise logic and types and the <strong>Application </strong>layer contains app-specific business logic and types. The difference is that enterprise logic could be shared across many applications, whereas the app-specific business logic will typically only be used within a specific application.</p>
 <p><strong>Core </strong>should not be dependent on data access and other infrastructure concerns so those dependencies are inverted.  This is achieved by adding interfaces or abstractions within <strong>Core</strong> that are implemented by layers outside of <strong>Core</strong>. For example, if you wanted to implement the <a href="https://deviq.com/repository-pattern/">Repository</a> pattern you would do so by adding an interface within <strong>Core </strong>and adding the implementation within <strong>Infrastructure</strong>. </p>
 <p>All dependencies flow inwards and <strong>Core </strong>has no dependency on any other layer. <strong>Infrastructure </strong>and <strong>Presentation </strong>depend on <strong>Core</strong>, but not on one another.</p>
 <div class="wp-block-image"><figure class="aligncenter size-large"><img data-attachment-id="2327" data-permalink="https://jasontaylor.dev/clean-architecture-getting-started/figure-01-2/" data-orig-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" data-orig-size="531,531" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Figure-01-2" data-image-description="" data-medium-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=300%2C300&amp;ssl=1" data-large-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" src="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=800&#038;ssl=1" alt="" class="wp-image-2327" srcset="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=531&amp;ssl=1 531w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=150%2C150&amp;ssl=1 150w" sizes="(max-width: 531px) 100vw, 531px" data-recalc-dims="1" /><figcaption><strong>Figure: Clean Architecture Diagram</strong></figcaption></figure></div>
-<p>This results in architecture and design that is:</p>
-<ul><li><strong>Independent of frameworks</strong>   it does not require the existence of some tool or framework</li><li><strong>Testable</strong>   easy to test &#8211; <strong>Core </strong>has no dependencies on anything external, so writing automated tests is much easier</li><li><strong>Independent of UI</strong>   logic is kept out of the UI so it is easy to change to another technology &#8211; right now you might be using Angular, soon Vue, eventually Blazor!</li><li><strong>Independent of the database</strong>   data-access concerns are cleanly separated so moving from SQL Server to CosmosDB or otherwise is trivial</li><li><strong>Independent of anything external</strong>   in fact, <strong>Core </strong>is completely isolated from the outside world &#8211; the difference between a system that will last 3 years, and one that will last 20 years</li></ul>
-<p>In the above design, there are only three circles, you may need more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
+<p>This results in architecture and design:</p>
+<ul><li><strong>Independent of frameworks</strong>   it does not require the existence of some tool or framework</li><li><strong>Testable</strong>   easy to test &#8211; <strong>Core </strong>has no dependencies on anything external, so writing automated tests is much easier</li><li><strong>Independent of UI</strong>   logic is kept out of the UI so it is easy to change to another technology &#8211; right now we might be using Angular, React, eventually Blazor!</li><li><strong>Independent of the database</strong>   data-access concerns are cleanly separated so moving from SQL Server to Oracle or otherwise is trivial</li><li><strong>Independent of anything external</strong>   in fact, <strong>Core </strong>is completely isolated from the outside world &#8211; the difference between a system that will last 3 years, and one that will last 20 years</li></ul>
+<p>In the above design, there are only three circles and there could be more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
 <h2>Technologies</h2>
 
 <p>Aside from .NET Core, numerous technologies are used within this solution including:</p>
@@ -69,3 +86,7 @@
   <li><a href="https://rules.ssw.com.au/rules-to-better-clean-architecture">Rules to Better Clean Architecture</a></li>
 
 </ul>
+
+<h2>Questions or Comments</h2>
+
+<p>Send them to Fuji Nguyen</p>

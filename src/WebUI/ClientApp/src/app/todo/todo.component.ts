@@ -1,5 +1,7 @@
 import { Component, TemplateRef } from '@angular/core';
-import { TodoItemsClient, CreateTodoItemCommand, TodoItemDto, UpdateTodoItemCommand, TodosVm, TodoListsClient, TodoListDto, CreateTodoListCommand, UpdateTodoListCommand, UpdateTodoItemDetailCommand } from '../cleansolution-api';
+import { TodoItemsClient, CreateTodoItemCommand, TodoItemDto,
+    UpdateTodoItemCommand, TodosVm, TodoListsClient, TodoListDto,
+    CreateTodoListCommand, UpdateTodoListCommand, UpdateTodoItemDetailCommand } from '../cleansolution-api';
 import { faPlus, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -16,7 +18,7 @@ export class TodoComponent {
 
     selectedList: TodoListDto;
     selectedItem: TodoItemDto;
-    
+
     newListEditor: any = {};
     listOptionsEditor: any = {};
     itemDetailsEditor: any = {};
@@ -48,16 +50,16 @@ export class TodoComponent {
 
     showNewListModal(template: TemplateRef<any>): void {
         this.newListModalRef = this.modalService.show(template);
-        setTimeout(() => document.getElementById("title").focus(), 250);
+        setTimeout(() => document.getElementById('title').focus(), 250);
     }
-    
+
     newListCancelled(): void {
         this.newListModalRef.hide();
         this.newListEditor = {};
     }
 
     addList(): void {
-        let list = TodoListDto.fromJS({
+        const list = TodoListDto.fromJS({
             id: 0,
             title: this.newListEditor.title,
             items: [],
@@ -72,13 +74,13 @@ export class TodoComponent {
                 this.newListEditor = {};
             },
             error => {
-                let errors = JSON.parse(error.response);
+                const errors = JSON.parse(error.response);
 
                 if (errors && errors.Title) {
                     this.newListEditor.error = errors.Title[0];
                 }
 
-                setTimeout(() => document.getElementById("title").focus(), 250);
+                setTimeout(() => document.getElementById('title').focus(), 250);
             }
         );
     }
@@ -113,7 +115,7 @@ export class TodoComponent {
         this.listsClient.delete(this.selectedList.id).subscribe(
             () => {
                 this.deleteListModalRef.hide();
-                this.vm.lists = this.vm.lists.filter(t => t.id != this.selectedList.id)
+                this.vm.lists = this.vm.lists.filter(t => t.id !== this.selectedList.id);
                 this.selectedList = this.vm.lists.length ? this.vm.lists[0] : null;
             },
             error => console.error(error)
@@ -135,9 +137,9 @@ export class TodoComponent {
         this.itemsClient.updateItemDetails(this.selectedItem.id, UpdateTodoItemDetailCommand.fromJS(this.itemDetailsEditor))
             .subscribe(
                 () => {
-                    if (this.selectedItem.listId != this.itemDetailsEditor.listId) {
-                        this.selectedList.items = this.selectedList.items.filter(i => i.id != this.selectedItem.id)
-                        let listIndex = this.vm.lists.findIndex(l => l.id == this.itemDetailsEditor.listId);
+                    if (this.selectedItem.listId !== this.itemDetailsEditor.listId) {
+                        this.selectedList.items = this.selectedList.items.filter(i => i.id !== this.selectedItem.id);
+                        const listIndex = this.vm.lists.findIndex(l => l.id === this.itemDetailsEditor.listId);
                         this.selectedItem.listId = this.itemDetailsEditor.listId;
                         this.vm.lists[listIndex].items.push(this.selectedItem);
                     }
@@ -152,7 +154,7 @@ export class TodoComponent {
     }
 
     addItem() {
-        let item = TodoItemDto.fromJS({
+        const item = TodoItemDto.fromJS({
             id: 0,
             listId: this.selectedList.id,
             priority: this.vm.priorityLevels[0].value,
@@ -161,7 +163,7 @@ export class TodoComponent {
         });
 
         this.selectedList.items.push(item);
-        let index = this.selectedList.items.length - 1;
+        const index = this.selectedList.items.length - 1;
         this.editItem(item, 'itemTitle' + index);
     }
 
@@ -171,14 +173,14 @@ export class TodoComponent {
     }
 
     updateItem(item: TodoItemDto, pressedEnter: boolean = false): void {
-        let isNewItem = item.id == 0;
+        const isNewItem = item.id === 0;
 
         if (!item.title.trim()) {
             this.deleteItem(item);
             return;
         }
 
-        if (item.id == 0) {
+        if (item.id === 0) {
             this.itemsClient.create(CreateTodoItemCommand.fromJS({ ...item, listId: this.selectedList.id }))
                 .subscribe(
                     result => {
@@ -207,12 +209,12 @@ export class TodoComponent {
             this.itemDetailsModalRef.hide();
         }
 
-        if (item.id == 0) {
-            let itemIndex = this.selectedList.items.indexOf(this.selectedItem);
+        if (item.id === 0) {
+            const itemIndex = this.selectedList.items.indexOf(this.selectedItem);
             this.selectedList.items.splice(itemIndex, 1);
         } else {
             this.itemsClient.delete(item.id).subscribe(
-                () => this.selectedList.items = this.selectedList.items.filter(t => t.id != item.id),
+                () => this.selectedList.items = this.selectedList.items.filter(t => t.id !== item.id),
                 error => console.error(error)
             );
         }
