@@ -41,26 +41,36 @@
   <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes avaiable for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
 </ul>
 
-<h2>Where</h2>
-
-<p>
-  This prototype is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
-</p>
-
 
 <h2>Architecture References</h2>
 <p>Source/Credit: <a href="https://jasontaylor.dev/clean-architecture-getting-started">https://jasontaylor.dev/clean-architecture-getting-started </a></p>
 <p>With Clean Architecture (see picture below), the <strong>Domain </strong>and <strong>Application </strong>layers are at the center of the design. This is known as the <strong>Core </strong>of the system.</p>
 <p>The <strong>Domain</strong> layer contains enterprise logic and types and the <strong>Application </strong>layer contains app-specific business logic and types. The difference is that enterprise logic could be shared across many applications, whereas the app-specific business logic will typically only be used within a specific application.</p>
 <p><strong>Core </strong>should not be dependent on data access and other infrastructure concerns so those dependencies are inverted.  This is achieved by adding interfaces or abstractions within <strong>Core</strong> that are implemented by layers outside of <strong>Core</strong>. For example, if you wanted to implement the <a href="https://deviq.com/repository-pattern/">Repository</a> pattern you would do so by adding an interface within <strong>Core </strong>and adding the implementation within <strong>Infrastructure</strong>. </p>
-<p>All dependencies flow inwards and <strong>Core </strong>has no dependency on any other layer. <strong>Infrastructure </strong>and <strong>Presentation </strong>depend on <strong>Core</strong>, but not on one another.</p>
-<div class="wp-block-image"><figure class="aligncenter size-large"><img data-attachment-id="2327" data-permalink="https://jasontaylor.dev/clean-architecture-getting-started/figure-01-2/" data-orig-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" data-orig-size="531,531" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Figure-01-2" data-image-description="" data-medium-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=300%2C300&amp;ssl=1" data-large-file="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?fit=531%2C531&amp;ssl=1" src="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=800&#038;ssl=1" alt="" class="wp-image-2327" srcset="https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?w=531&amp;ssl=1 531w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/jasontaylor.dev/wp-content/uploads/2020/01/Figure-01-2.png?resize=150%2C150&amp;ssl=1 150w" sizes="(max-width: 531px) 100vw, 531px" data-recalc-dims="1" /><figcaption><strong>Figure: Clean Architecture Diagram</strong></figcaption></figure></div>
+<p>All dependencies flow inwards and <strong>Core </strong>has no dependency on any other layers. <strong>Infrastructure </strong>and <strong>Presentation </strong>depend on <strong>Core</strong>, but not on one another.</p>
+<img src="https://rules.ssw.com.au/PublishingImages/onion-view-clean-architecture.png" />
+<p><strong>Figure: Clean Architecture Diagram</strong></p>
+
 <p>This results in architecture and design:</p>
 <ul><li><strong>Independent of frameworks</strong>   it does not require the existence of some tool or framework</li><li><strong>Testable</strong>   easy to test &#8211; <strong>Core </strong>has no dependencies on anything external, so writing automated tests is much easier</li><li><strong>Independent of UI</strong>   logic is kept out of the UI so it is easy to change to another technology &#8211; right now we might be using Angular, React, eventually Blazor!</li><li><strong>Independent of the database</strong>   data-access concerns are cleanly separated so moving from SQL Server to Oracle or otherwise is trivial</li><li><strong>Independent of anything external</strong>   in fact, <strong>Core </strong>is completely isolated from the outside world &#8211; the difference between a system that will last 3 years, and one that will last 20 years</li></ul>
 <p>In the above design, there are only three circles and there could be more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
+
+
+<h2>Use Cases</h2>
+<p>Suppose we want to modernize ACRS (Position Description for Civil Service) and MCLASS (Position Description for Foreign Service), how Clean Architecture can help?  What is the logical design?</p>
+
+<ul>
+  <li>Domain - Both apps share common domain models such as Employee, Jobcode, Grade, Assignment, Occupational Series, Bargaining, etc.  These resources should have enterprise-level REST WebAPI for sharing.  Benetits:  less code to write and maintain.</li>
+  <li>Application - ACRS contains business rules pertaining to OPM while MCLASS contains business rules pertaining to Oversea.  Thus app-specific business rules should be stored in core Application layer, written in C#/FluentValidation API.  Benetits:  testable business rules.</li>
+  <li>Presentation - Both ACRS and MCLASS can be upgraded to Angular, preferably using the Angular Accelerator starter kit. Benetits: consistent UI.</li>
+  <li>Persistence - With ORM library (EF or Dapper), ACRS database can continue to be Oracle and MCLASS can continue to be MSSQL.  Benetits:  both apps can be moved to a common database without code change.</li>
+  <li>Infrastructure - Email, File Storage, Workflow Engine, Identity Management, Health Check and Application Logging are interface implementations.  Benefits:  configurable and swappable services on-prem or in-cloud.</li>
+</ul>
+
+
 <h2>Technologies</h2>
 
-<p>Aside from .NET Core, numerous technologies are used within this solution including:</p>
+<p>Aside from .NET Core, numerous technologies are used within this prototype including:</p>
 
 
 <ul>
@@ -75,6 +85,8 @@
   <li>Automated testing with <a href="https://xunit.net/">xUnit.net</a>, <a href="https://github.com/Moq/moq4/wiki/Quickstart">Moq</a>, and <a href="https://shouldly.readthedocs.io/en/latest/">Shouldly</a></li>
 </ul>
 
+
+
 <h2>Additional resources</h2>
 
 <p>If you would like to learn more about any of these topics, take a look at the following resources: </p>
@@ -87,6 +99,11 @@
 
 </ul>
 
-<h2>Questions or Comments</h2>
+<h2>Prototype Source Code</h2>
 
+<p>
+  This prototype is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
+</p>
+
+<h2>Questions or Comments</h2>
 <p>Send them to Fuji Nguyen</p>
