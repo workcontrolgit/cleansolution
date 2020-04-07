@@ -1,43 +1,45 @@
-<h1>Hello SDD Developers</h1>
-<p>Welcome to Angular/NetCore WebAPI prototype.  The prototype is built on opensource technologies from established vendors  Google, Microsoft and Twitter.</p>
+<h1>Hello SPA Developers</h1>
+<p>Welcome to Angular/Net Core WebAPI prototype, built with</p>
 <ul>
-  <li><a href='https://angular.io/'>Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
-  <li><a href='https://get.asp.net/'>ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap 4.3</a> for layout and styling</li>
-  <li><a href='https://azure.microsoft.com/en-us/services/sql-database/'>Azure MS SQL SaS</a> for storage</li>
-  <li><a href='https://docs.microsoft.com/en-us/azure/active-directory/authentication/'>Azure Active Directory and MFA</a> for WebAPI security</li>
-  <li><a href='https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1'>Heath Check Net Core 3.1</a> for health probe</li>
-
-
+  <li><a href='https://angular.io/'>Google Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
+  <li><a href='https://get.asp.net/'>Microsoft ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
+  <li><a href='http://getbootstrap.com/'>Twitter Bootstrap 4.3</a> for layout and styling</li>
 </ul>
 
-<h2>Why and What</h2>
+<h2>Motivation</h2>
 
 <p>
-  The purpose of this prototype is to "learn, inspire an build" modern apps.  The prototype architecture is based on practical software solutions from the legendary Robert C. Martin (“Uncle Bob”).
-  Please refer to Architecture References section on this page for Clean Architecture overview.
+  The purpose of this prototype is to help developers to gain better understanding of Clean Architecture that is based on practical software solutions from the legendary Robert C. Martin (“Uncle Bob”).
+  Please refer to Architecture References section for further explanation.
 </p>
 
 <p>
-  So why not stay with the simple three-tiered architecture?  The UI layer couples with the Business layer and therefore the Database layer.
-  So then everything in our application is dependent on the database layer, aka "IDB" in our shop.
-  That might seem like no big deal, but let’s consider how often organization and applications make changes to their database.  For examples, let's go from on-prem PeopleSoft to cloud HCM.
-  Let's go from having all the logic in stored procedures to having it all in the ORM.  Let's move on-prem apps to the cloud and run them inside the Docker container.
-  And none of these changes have anything to do with the application core business functionality.
+  Many of us are familiar with three-tiered architecture.  The UI layer couples with the Business layer and therefore the Database layer.
+  As a result, everything in the application is dependent on the database layer.  Does IDB ring a bell?
+</p>
+<p>
+  So why not stay with the three-tiered architecture?  Let’s consider how often organization and applications make changes to their database.
+  Let's upgrade PeopleSoft database to cloud HCM.  Let's move all the business logic in stored procedures to the testable middle-tier.  Let's containerize and run apps inside Docker.  Applications will break left and right.  
+  Yet, none of those changes have anything to do with the application core business functionality.
 </p>
 
 <p>
-  How to modernize our apps?  How to refactor our apps and transition from rigid and fragile to flexible and agile?   Answer:  Clean Architecture and <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles.  This prototype is a demo of Clean Architecture, written in Angular/NetCore stack.
+  How to build apps that are adaptable to changes and easy to maintain and upgrade?  Answer:  Clean Architecture based on object-oriented <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles.
+  With Clean Architecture, our apps can be tighly integrated yet loosely coupled.  In layman's term, it is a practice of using Screw vs Nail when putting furniture together.    
+</p>
+<h2>Prototype Features</h2>
+<p>
+  This prototype is a demonstration of Clean Architecture concept.
 </p>
 
 <ul>
   <li><a href="/">Home</a> - homepage of the prototype</li>
-  <li><a href="/Identity/Account/Register">Register</a> - demonstration of provider model; storage of user accounts can be in Asp.Net Indentity Or Azure AD</li>
-  <li><a href="/Identity/Account/Login">Login</a> - demonstration of provider model; login using Asp.Net Indentity (accounts in the database) Or Azure AD/MFA</li>
-  <li><a href="/counter">Counter</a> - demonstration of publicly availabe application page that is NOT secured by Json Web Token (JWT)</li>
-  <li><a href="/fetch-data">Fetch data</a> - demonstration of proxy WebAPI (WebAPI calling WebAPI - weather service in this prototype); Securing data with JWT</li>
-  <li><a href="/todo">Todo</a> - demonstration of CRUD using Entity Framework against MSSQL SaS database; Securing WebAPI endpoints with JWT; Auto-gen Angular HTTP client Typescript library based on swagger.json with NSwag API</li>
-  <li><a href="/api">Swagger</a> - exploring webapi endpoints, providing UI to enter JWT token to explore WebAPI via web browser</li>
+  <li><a href="/Identity/Account/Register">Register</a> - demonstration of independent storage (user accounts can be in database Or Azure AD)</li>
+  <li><a href="/Identity/Account/Login">Login</a> - demonstration of interface segregation for flexible identity management; login with Asp.Net Indentity (accounts in the database) Or Azure AD/MFA</li>
+  <li><a href="/counter">Counter</a> - demonstration of anonymous access to application page</li>
+  <li><a href="/fetch-data">Fetch data</a> - demonstration of securing external WebAPI (WebAPI calling WebAPI - weather service in this example)</li>
+  <li><a href="/todo">Todo</a> - demonstration of CRUD using ORM Entity Framework against MSSQL SaS database; securing WebAPI with Identity Connect and oAuth2/Scopes</li>
+  <li><a href="/api">Swagger</a> - demontration of OpenAPI and JWT token to explore WebAPI via web browser</li>
   <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes avaiable for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
 </ul>
 
@@ -56,15 +58,15 @@
 <p>In the above design, there are only three circles and there could be more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
 
 
-<h2>Use Cases</h2>
-<p>Suppose we want to modernize ACRS (Position Description for Civil Service) and MCLASS (Position Description for Foreign Service), how Clean Architecture can help?  What is the logical design?</p>
+<h2>Use Case</h2>
+<p>Suppose we want to upgrade ACRS (Position Classification for Civil Services) and MCLASS (Position Classification for Foreign Services).  How to apply Clean Architecture onion-view (see Figure above)?  What are the benefits?</p>
 
 <ul>
-  <li>Domain - Both apps share common domain models such as Employee, Jobcode, Grade, Assignment, Occupational Series, Bargaining, etc.  These resources should have enterprise-level REST WebAPI for sharing.  Benetits:  less code to write and maintain.</li>
-  <li>Application - ACRS contains business rules pertaining to OPM while MCLASS contains business rules pertaining to Oversea.  Thus app-specific business rules should be stored in core Application layer, written in C#/FluentValidation API.  Benetits:  testable business rules.</li>
-  <li>Presentation - Both ACRS and MCLASS can be upgraded to Angular, preferably using the Angular Accelerator starter kit. Benetits: consistent UI.</li>
-  <li>Persistence - With ORM library (EF or Dapper), ACRS database can continue to be Oracle and MCLASS can continue to be MSSQL.  Benetits:  both apps can be moved to a common database without code change.</li>
-  <li>Infrastructure - Email, File Storage, Workflow Engine, Identity Management, Health Check and Application Logging are interface implementations.  Benefits:  configurable and swappable services on-prem or in-cloud.</li>
+  <li>Domain - Both apps share cross-cutting entities such as Employee, Jobcode, Grade, Assignment, Occupational Series, Bargaining, etc.  Implement these entities as enterprise-wide REST WebAPI resources.  Benefits:  less code to write and maintain.</li>
+  <li>Application - ACRS contains business rules pertaining to domestic (OPM) while MCLASS contains business rules pertaining to Oversea.  Keep app-specific business rules in the Application layer.  Benefits:  testable business rules.</li>
+  <li>Presentation - Both ACRS and MCLASS can be upgraded to Angular.  Fork the Angular Accelerator starter kit to jump start the UI. Benefits: consistent UI.</li>
+  <li>Persistence - With ORM library, storage can be Oracle or MSSQL.  Use ORM library such as EF or Dapper to decouple data access from vendor specific databases.   Benefits:  both apps can be moved to a common database without code change.</li>
+  <li>Infrastructure - Email, File Storage, Workflow Engine, Identity Management, Health Check and Application Logging are interface implementations.  Benefits:  configurable and swappable services (tightly integrated yet loosely coupled,).</li>
 </ul>
 
 
@@ -99,11 +101,11 @@
 
 </ul>
 
-<h2>Prototype Source Code</h2>
+<h2>Show me the code</h2>
 
 <p>
-  This prototype is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
+  This prototype https://cleansolution.azurewebsites.us/ is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
 </p>
 
 <h2>Questions or Comments</h2>
-<p>Send them to Fuji Nguyen</p>
+<p>Often there is no time to do it right the first time yet there will be time to rewrite (:  We can do better!   If you have questions or comments about this post, email to Fuji Nguyen.  Thank you.</p>
