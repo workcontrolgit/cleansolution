@@ -1,5 +1,4 @@
- <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/JasonGT/cleansolution/master/.github/icon.png" />
- 
+
  # Clean Architecture Solution Template
 
 This is a solution template for creating a Single Page App (SPA) with Angular 8 and ASP.NET Core 3 following the principles of Clean Architecture. Create a new project based on this template by clicking the above **Use this template** button or by installing and running the associated NuGet package (see Getting Started for full details). 
