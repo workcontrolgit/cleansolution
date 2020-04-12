@@ -14,6 +14,8 @@
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <UserSecretsId>bcf41b11-2892-4b3a-87e6-dcf9845f6a11</UserSecretsId>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.11.0.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>

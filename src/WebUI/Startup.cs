@@ -62,15 +62,20 @@ namespace cleansolution.WebUI
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            var oidcConfig = Configuration.GetSection("OidcConfig");
+            var authority = oidcConfig["Authority"];
+            var clientId = oidcConfig["ClientId"];
+            var validateIssuer = bool.Parse(oidcConfig["ValidateIssuer"]);
+            var callBack = oidcConfig["CallbackPath"];
+
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
-                     options.Authority = $"https://login.microsoftonline.us/common";
-                     options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
-                     //options.ClientId = "99eb0b9d-ca40-476e-b5ac-6f4c32bfb530";
-                     options.ClientId = "67b6f294-5565-43d2-ba03-c082ae6ee7b5";
+                     options.Authority = authority;
+                     options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = validateIssuer};
+                     options.ClientId = clientId;
 
-                     options.CallbackPath = "/signin-oidc";
+                     options.CallbackPath = callBack;
 
                  });
 
