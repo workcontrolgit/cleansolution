@@ -61,7 +61,7 @@ namespace cleansolution.WebUI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
+            // OIDC from appsettings
             var oidcConfig = Configuration.GetSection("OidcConfig");
             var authority = oidcConfig["Authority"];
             var clientId = oidcConfig["ClientId"];

@@ -1,5 +1,5 @@
-<h1>Hello SPA Developers</h1>
-<p>Welcome to Angular/Net Core WebAPI blog + prototype built with</p>
+<h1>Angular/WebAPI Starter Kit Blog</h1>
+<p>The starter kit prototype is built with:</p>
 <ul>
   <li><a href='https://angular.io/'>Google Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
   <li><a href='https://get.asp.net/'>Microsoft ASP.NET Core 3.1</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
@@ -20,12 +20,12 @@
 <p>
   So why not stay with the three-tiered architecture?  Let’s consider how often organization and applications make changes to their database.
   Let's upgrade PeopleSoft database to cloud HCM.  Let's move all the business logic in stored procedures to the testable middle-tier.  Let's containerize and run apps inside Docker.
-  None of these changes have anything to do with the application core business functionality and yet it will require significant re-write erfort.  
+  None of these changes have anything to do with the application core business functionality.  Yet it will require significant re-write effort.  
 </p>
 
 <p>
   How to build application system that is adaptable to changes?  Answer:  adopt Clean Architecture and object-oriented <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles as <strong>coding standard</strong>.
-  With Clean Architecture, application components are tighly integrated yet loosely coupled.  In layman's term, it is a practice of using Screw vs Nail when putting furniture together.
+  With Clean Architecture, application components are tightly integrated yet loosely coupled.  In layman's term, it is a practice of using Screw vs Nail when assemble furniture.
 </p>
 <h2>Prototype Features</h2>
 <p>
@@ -35,12 +35,12 @@
 <ul>
   <li><a href="/">Home</a> - homepage of the prototype</li>
   <li><a href="/Identity/Account/Register">Register</a> - demonstration of independent storage (user accounts can be in database Or Azure AD)</li>
-  <li><a href="/Identity/Account/Login">Login</a> - demonstration of interface segregation for flexible identity management; login with Asp.Net Indentity (accounts in the database) Or Azure AD/MFA.  <strong>If you have dosdev account, give it a try.</strong></li>
+  <li><a href="/Identity/Account/Login">Login</a> - demonstration of interface segregation for flexible identity management; login with Asp.Net Identity (accounts in the database) Or Azure AD/MFA.  <strong>If you have dosdev account, give it a try.</strong></li>
   <li><a href="/counter">Counter</a> - demonstration of anonymous access to application page</li>
   <li><a href="/fetch-data">Fetch data</a> - demonstration of securing downstream WebAPI (WebAPI calling WebAPI - weather service in this example)</li>
   <li><a href="/todo">Todo</a> - demonstration of CRUD using ORM Entity Framework against MSSQL SaS database; securing WebAPI with Identity Connect and oAuth2/Scopes</li>
-  <li><a href="/api">Swagger</a> - demontration of OpenAPI and JWT token to explore WebAPI via web browser</li>
-  <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes avaiable for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
+  <li><a href="/api">Swagger</a> - demonstration of OpenAPI and JWT token to explore WebAPI via web browser</li>
+  <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes available for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
 </ul>
 
 
@@ -104,8 +104,8 @@
 <h2>Show me the code</h2>
 
 <p>
-  This prototype https://cleansolution.azurewebsites.us/ is hotsted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
+  This prototype https://cleansolution.azurewebsites.us/ is hosted in Azuze Cloud.  The source code is in the "cleansolution" GIT repository in Azure DevOps.  Developers are welcomed to Git Clone and inspect the source code.
 </p>
 
 <h2>Questions or Comments</h2>
-<p>Coding should be enjoyable (:  If you have questions or comments about this post, email to Fuji Nguyen.  Thank you!</p>
+<p>Coding should be enjoyable!  If you have questions or comments about this post, email to Fuji Nguyen.  Thank you!</p>
