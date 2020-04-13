@@ -1,4 +1,4 @@
-<h1>Angular/WebAPI Starter Kit Blog</h1>
+<h1>Clean Architectue Blog for Angular/WebAPI Starter Kit</h1>
 <p>The starter kit prototype is built with:</p>
 <ul>
   <li><a href='https://angular.io/'>Google Angular 8.0</a> and <a href='http://www.typescriptlang.org/'>TypeScript 3.4</a> for client-side code</li>
@@ -9,46 +9,48 @@
 <h2>Motivation</h2>
 
 <p>
-  The purpose of this blog is to get developers familiar with Clean Architecture design which is based on practical software solutions from the legendary Robert C. Martin (“Uncle Bob”).
-  Please refer to Architecture References section for further explanation.
+  The purpose of this blog is to familiarize developers with Clean Architecture design which is based on practical software solutions from the legendary Robert C. Martin (“Uncle Bob”).
+  Please refer to Clean Architecture Reference section later on for further explanation.
 </p>
 
 <p>
-  Many of us are familiar with the three-tiered architecture.  The UI layer couples with the Business layer and therefore the Database layer.
-  As a result, everything in the application is dependent on the database layer, which can become unmanageable overtime.  Does contorted IDB (Integrated Database Broker) ring a bell?
+  Many developers are comfortable with three-tiered architecture.  The UI layer couples with the Business layer and therefore the Database layer.
+  As a result, everything in the application is extremely dependent on the database layer.  Does IDB (Integrated Database Broker) ring a bell?
 </p>
 <p>
-  So why not stay with the three-tiered architecture?  Let’s consider how often organization and applications make changes to their database.
+  So why not continue with the three-tiered architecture?  Let’s consider how often organization and applications make changes to their database.
   Let's upgrade PeopleSoft database to cloud HCM.  Let's move all the business logic in stored procedures to the testable middle-tier.  Let's containerize and run apps inside Docker.
-  None of these changes have anything to do with the application core business functionality.  Yet it will require significant re-write effort.  
+  None of these changes have anything to do with the application core business functionality, yet it will require significant re-write effort.  
 </p>
 
 <p>
-  How to build application system that is adaptable to changes?  Answer:  adopt Clean Architecture and object-oriented <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles as <strong>coding standard</strong>.
-  With Clean Architecture, application components are tightly integrated yet loosely coupled.  In layman's term, it is a practice of using Screw vs Nail when assemble furniture.
+  How can developers build application systems that are adaptable to changes?  Developers should consider Clean Architecture and object-oriented <a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a> principles as <strong>coding standard</strong>.
+  With Clean Architecture, application components are tightly integrated yet loosely coupled.  In layman's term, it is the practice of replacing a light bulb instead of purchasing a new lamp.
 </p>
 <h2>Prototype Features</h2>
 <p>
-  This prototype is a demonstration of Clean Architecture concept.  
+  This working prototype is a demonstration of Clean Architecture concept.  
 </p>
 
 <ul>
   <li><a href="/">Home</a> - homepage of the prototype</li>
-  <li><a href="/Identity/Account/Register">Register</a> - demonstration of independent storage (user accounts can be in database Or Azure AD)</li>
-  <li><a href="/Identity/Account/Login">Login</a> - demonstration of interface segregation for flexible identity management; login with Asp.Net Identity (accounts in the database) Or Azure AD/MFA.  <strong>If you have dosdev account, give it a try.</strong></li>
+  <li><a href="/Identity/Account/Register">Register</a> - demonstration of independent storage (user accounts can be in database or Azure AD)</li>
+  <li><a href="/Identity/Account/Login">Login</a> - demonstration of interface segregation for flexible identity management; login with Asp.Net Identity (accounts in the database) or Azure AD/MFA.  <strong>If you have dosdev account, give it a try.</strong></li>
   <li><a href="/counter">Counter</a> - demonstration of anonymous access to application page</li>
-  <li><a href="/fetch-data">Fetch data</a> - demonstration of securing downstream WebAPI (WebAPI calling WebAPI - weather service in this example)</li>
+  <li><a href="/fetch-data">Fetch data</a> - demonstration of securing downstream WebAPI (weather service in this example)</li>
   <li><a href="/todo">Todo</a> - demonstration of CRUD using ORM Entity Framework against MSSQL SaS database; securing WebAPI with Identity Connect and oAuth2/Scopes</li>
   <li><a href="/api">Swagger</a> - demonstration of OpenAPI and JWT token to explore WebAPI via web browser</li>
   <li><a href="/health">Health Check</a> - endpoint for reporting health status; probes available for websites, databases (MSSQL, Oracle, etc.), and infrastructure services (SMTP, Log, etc.)</li>
 </ul>
 
 
-<h2>Clean Architecture References</h2>
+<h2>Clean Architecture Reference</h2>
 <p>Source/Credit: <a href="https://jasontaylor.dev/clean-architecture-getting-started">https://jasontaylor.dev/clean-architecture-getting-started </a></p>
 <p>With Clean Architecture (see picture below), the <strong>Domain </strong>and <strong>Application </strong>layers are at the center of the design. This is known as the <strong>Core </strong>of the system.</p>
 <p>The <strong>Domain</strong> layer contains enterprise logic and types and the <strong>Application </strong>layer contains app-specific business logic and types. The difference is that enterprise logic could be shared across many applications, whereas the app-specific business logic will typically only be used within a specific application.</p>
-<p><strong>Core </strong>should not be dependent on data access and other infrastructure concerns so those dependencies are inverted.  This is achieved by adding interfaces or abstractions within <strong>Core</strong> that are implemented by layers outside of <strong>Core</strong>. For example, if you wanted to implement the <a href="https://deviq.com/repository-pattern/">Repository</a> pattern you would do so by adding an interface within <strong>Core </strong>and adding the implementation within <strong>Infrastructure</strong>. </p>
+<p><strong>Core </strong>should not be dependent on data access and other infrastructure concerns so those dependencies are inverted (SOLID - Dependency Inversion Principle).
+  This is achieved by adding interfaces or abstractions (SOLID - Interface segregation principle) within <strong>Core</strong> that are implemented by layers outside of <strong>Core</strong>.
+  For example, if you wanted to implement the <a href="https://deviq.com/repository-pattern/">Repository</a> pattern you would do so by adding an interface within <strong>Core </strong>and adding the implementation within <strong>Infrastructure</strong>. </p>
 <p>All dependencies flow inwards and <strong>Core </strong>has no dependency on any other layers. <strong>Infrastructure </strong>and <strong>Presentation </strong>depend on <strong>Core</strong>, but not on one another.</p>
 <img src="https://rules.ssw.com.au/PublishingImages/onion-view-clean-architecture.png" class="img-fluid"/>
 <p><strong>Figure: Clean Architecture Diagram</strong></p>
@@ -58,15 +60,15 @@
 <p>In the above design, there are only three circles and there could be more. Think of this as a starting point. Just remember to keep all dependencies pointing inwards.</p>
 
 
-<h2>Use Case</h2>
+<h2>Business Use Case</h2>
 <p>Suppose we want to upgrade ACRS (Position Classification for Civil Services) and MCLASS (Position Classification for Foreign Services).  How to apply Clean Architecture onion-view (see Figure above)?  What are the benefits?</p>
 
 <ul>
   <li>Domain - Both apps share cross-cutting entities such as Employee, Jobcode, Grade, Assignment, Occupational Series, Bargaining, etc.  Implement these entities as enterprise-wide REST WebAPI resources.  Benefits:  less code to write and maintain.</li>
-  <li>Application - ACRS contains business rules pertaining to domestic (OPM) while MCLASS contains business rules pertaining to Oversea.  Keep app-specific business rules in the Application layer.  Benefits:  testable business rules.</li>
+  <li>Application - ACRS contains business rules pertaining to domestic (OPM) while MCLASS contains business rules pertaining to Oversea.  Write app-specific business rules in the Application layer using FluentValidation API.  Benefits:  testable business rules.</li>
   <li>Presentation - Both ACRS and MCLASS can be upgraded to Angular.  Fork the Angular Accelerator starter kit to jump start the UI. Benefits: consistent UI.</li>
   <li>Persistence - With ORM library, storage can be Oracle or MSSQL.  Use ORM library such as EF or Dapper to decouple data access from vendor specific databases.   Benefits:  both apps can be moved to a common database without code change.</li>
-  <li>Infrastructure - Email, File Storage, Workflow Engine, Identity Management, Health Check and Application Logging are interface implementations.  Benefits:  configurable and swappable services (tightly integrated yet loosely coupled,).</li>
+  <li>Infrastructure - Email, File Storage, Workflow Engine, Identity Management, Health Check and Application Logging are interface implementations.  Benefits:  configurable and swappable services (tightly integrated yet loosely coupled).</li>
 </ul>
 
 
