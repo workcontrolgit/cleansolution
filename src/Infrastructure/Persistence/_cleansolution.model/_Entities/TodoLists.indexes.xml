@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<configuration type="entity.indexes" id="0981d8f8-f4ee-4ff4-bdbf-905a5dd5de18">
-		<index id="4d8fcc06-d55f-42af-a5eb-9503a167ccb0" clustered="1" importedname="PK_TodoLists" indextype="0" isunique="1">
-				<summary><![CDATA[]]></summary>
-				<indexcolumnset>
-						<column id="d0376deb-4cf9-4158-ad79-d335c338d3f4" ascending="1" fieldid="d32c767d-33c1-4062-82d6-339dcd46940e" sortorder="1" />
-				</indexcolumnset>
-		</index>
-</configuration>

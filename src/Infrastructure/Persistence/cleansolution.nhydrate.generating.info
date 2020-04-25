@@ -1,8 +1,0 @@
-<configuration GeneratedVersion="0" ModelerVersion="7.0.1.233">
-  <excludeList>
-    <item>nHydrate.Generator.EFCodeFirstNetCore.EFCodeFirstNetCoreProjectGenerator</item>
-    <item>nHydrate.Generator.SQLInstaller.DatabaseProjectGenerator</item>
-  </excludeList>
-  <tableFacadeSettings />
-  <columnFacadeSettings />
-</configuration>
