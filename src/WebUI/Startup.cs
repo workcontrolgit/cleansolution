@@ -4,7 +4,6 @@ using cleansolution.Infrastructure.Persistence;
 using cleansolution.WebUI.Common;
 using cleansolution.WebUI.Services;
 using FluentValidation.AspNetCore;
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -79,13 +78,6 @@ namespace cleansolution.WebUI
 
                  });
 
-            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            //  .AddIdentityServerAuthentication(options =>
-            //  {
-            //      options.Authority = "https://localhost:44312/";
-            //      options.ApiName = "dataEventRecords";
-            //      options.ApiSecret = "dataEventRecordsSecret";
-            //  });
 
             services.AddOpenApiDocument(configure =>
             {
